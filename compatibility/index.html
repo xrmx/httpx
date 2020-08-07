@@ -1,0 +1,666 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A next-generation HTTP client for Python.">
+      
+      
+        <link rel="canonical" href="https://www.python-httpx.org/compatibility/">
+      
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.3">
+    
+    
+      
+        <title>Requests Compatibility - HTTPX</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.947af8d5.min.css">
+      
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../css/custom.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#requests-compatibility-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://www.python-httpx.org/" title="HTTPX" class="md-header-nav__button md-logo" aria-label="HTTPX">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            HTTPX
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Requests Compatibility
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/encode/httpx/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    encode/httpx
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://www.python-httpx.org/" title="HTTPX" class="md-nav__button md-logo" aria-label="HTTPX">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    HTTPX
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/encode/httpx/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    encode/httpx
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../quickstart/" title="QuickStart" class="md-nav__link">
+      QuickStart
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../advanced/" title="Advanced Usage" class="md-nav__link">
+      Advanced Usage
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../async/" title="Async Support" class="md-nav__link">
+      Async Support
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../http2/" title="HTTP/2 Support" class="md-nav__link">
+      HTTP/2 Support
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../environment_variables/" title="Environment Variables" class="md-nav__link">
+      Environment Variables
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Requests Compatibility
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Requests Compatibility" class="md-nav__link md-nav__link--active">
+      Requests Compatibility
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#request-urls" class="md-nav__link">
+    Request URLs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#status-codes" class="md-nav__link">
+    Status Codes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#streaming-responses" class="md-nav__link">
+    Streaming responses
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proxy-keys" class="md-nav__link">
+    Proxy keys
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssl-configuration" class="md-nav__link">
+    SSL configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#request-body-on-http-methods" class="md-nav__link">
+    Request body on HTTP methods
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checking-for-4xx5xx-responses" class="md-nav__link">
+    Checking for 4xx/5xx responses
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#client-instances" class="md-nav__link">
+    Client instances
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#request-instantiation" class="md-nav__link">
+    Request instantiation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mocking" class="md-nav__link">
+    Mocking
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../api/" title="Developer Interface" class="md-nav__link">
+      Developer Interface
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../exceptions/" title="Exceptions" class="md-nav__link">
+      Exceptions
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../third-party-packages/" title="Third Party Packages" class="md-nav__link">
+      Third Party Packages
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../contributing/" title="Contributing" class="md-nav__link">
+      Contributing
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#request-urls" class="md-nav__link">
+    Request URLs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#status-codes" class="md-nav__link">
+    Status Codes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#streaming-responses" class="md-nav__link">
+    Streaming responses
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proxy-keys" class="md-nav__link">
+    Proxy keys
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssl-configuration" class="md-nav__link">
+    SSL configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#request-body-on-http-methods" class="md-nav__link">
+    Request body on HTTP methods
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checking-for-4xx5xx-responses" class="md-nav__link">
+    Checking for 4xx/5xx responses
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#client-instances" class="md-nav__link">
+    Client instances
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#request-instantiation" class="md-nav__link">
+    Request instantiation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mocking" class="md-nav__link">
+    Mocking
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                <h1 id="requests-compatibility-guide">Requests Compatibility Guide</h1>
+<p>HTTPX aims to be compatible with the <code>requests</code> API wherever possible.</p>
+<p>This documentation outlines places where the API differs...</p>
+<h2 id="request-urls">Request URLs</h2>
+<p>Accessing <code>response.url</code> will return a <code>URL</code> instance, rather than a string.
+Use <code>str(response.url)</code> if you need a string instance.</p>
+<h2 id="status-codes">Status Codes</h2>
+<p>In our documentation we prefer the uppercased versions, such as <code>codes.NOT_FOUND</code>, but also provide lower-cased versions for API compatibility with <code>requests</code>.</p>
+<p>Requests includes various synonyms for status codes that HTTPX does not support.</p>
+<h2 id="streaming-responses">Streaming responses</h2>
+<p>HTTPX provides a <code>.stream()</code> interface rather than using <code>stream=True</code>. This ensures that streaming responses are always properly closed outside of the stream block, and makes it visually clearer at which points streaming I/O APIs may be used with a response.</p>
+<p>For example:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">with</span> <span class="n">request</span><span class="o">.</span><span class="n">stream</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;https://www.example.com&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
+    <span class="o">...</span>
+</code></pre></div>
+
+
+<p>Within a <code>stream()</code> block request data is made available with:</p>
+<ul>
+<li><code>.iter_bytes()</code> - Instead of <code>response.iter_content()</code></li>
+<li><code>.iter_text()</code> - Instead of <code>response.iter_content(decode_unicode=True)</code></li>
+<li><code>.iter_lines()</code> - Corresponding to <code>response.iter_lines()</code></li>
+<li><code>.iter_raw()</code> - Use this instead of <code>response.raw</code></li>
+<li><code>.read()</code> - Read the entire response body, making <code>request.text</code> and <code>response.content</code> available.</li>
+</ul>
+<h2 id="proxy-keys">Proxy keys</h2>
+<p>When using <code>httpx.Client(proxies={...})</code> to map to a selection of different proxies, we use full URL schemes, such as <code>proxies={"http://": ..., "https://": ...}</code>.</p>
+<p>This is different to the <code>requests</code> usage of <code>proxies={"http": ..., "https": ...}</code>.</p>
+<p>This change is for better consistency with more complex mappings, that might also include domain names, such as <code>proxies={"all://": ..., "all://www.example.com": None}</code> which maps all requests onto a proxy, except for requests to "www.example.com" which have an explicit exclusion.</p>
+<h2 id="ssl-configuration">SSL configuration</h2>
+<p>When using a <code>Client</code> instance, the <code>trust_env</code>, <code>verify</code>, and <code>cert</code> arguments should always be passed on client instantiation, rather than passed to the request method.</p>
+<p>If you need more than one different SSL configuration, you should use different client instances for each SSL configuration.</p>
+<h2 id="request-body-on-http-methods">Request body on HTTP methods</h2>
+<p>The HTTP <code>GET</code>, <code>DELETE</code>, <code>HEAD</code>, and <code>OPTIONS</code> methods are specified as not supporting a request body. To stay in line with this, the <code>.get</code>, <code>.delete</code>, <code>.head</code> and <code>.options</code> functions do not support <code>files</code>, <code>data</code>, or <code>json</code> arguments.</p>
+<p>If you really do need to send request data using these http methods you should use the generic <code>.request</code> function instead.</p>
+<h2 id="checking-for-4xx5xx-responses">Checking for 4xx/5xx responses</h2>
+<p>We don't support <code>response.is_ok</code> since the naming is ambiguous there, and might incorrectly imply an equivalence to <code>response.status_code == codes.OK</code>. Instead we provide the <code>response.is_error</code> property. Use <code>if not response.is_error:</code> instead of <code>if response.is_ok:</code>.</p>
+<h2 id="client-instances">Client instances</h2>
+<p>The HTTPX equivalent of <code>requests.Session</code> is <code>httpx.Client</code>.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>is generally equivalent to</p>
+<div class="codehilite"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</code></pre></div>
+
+
+<h2 id="request-instantiation">Request instantiation</h2>
+<p>There is no notion of <a href="https://requests.readthedocs.io/en/stable/user/advanced/#prepared-requests">prepared requests</a> in HTTPX. If you need to customize request instantiation, see <a href="/advanced#request-instances">Request instances</a>.</p>
+<p>Besides, <code>httpx.Request()</code> does not support the <code>auth</code>, <code>timeout</code>, <code>allow_redirects</code>, <code>proxies</code>, <code>verify</code> and <code>cert</code> parameters. However these are available in <code>httpx.request</code>, <code>httpx.get</code>, <code>httpx.post</code> etc., as well as on <a href="/advanced#client-instances"><code>Client</code> instances</a>.</p>
+<h2 id="mocking">Mocking</h2>
+<p>If you need to mock HTTPX the same way that test utilities like <code>responses</code> and <code>requests-mock</code> does for <code>requests</code>, see <a href="https://github.com/lundberg/respx">RESPX</a>.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../environment_variables/" title="Environment Variables" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Environment Variables
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../api/" title="Developer Interface" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Developer Interface
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.c3dc8c49.min.js"></script>
+      <script src="../assets/javascripts/bundle.f9edbbd5.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "..",
+          features: [],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.8e2cddea.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="../js/chat.js"></script>
+      
+        <script src="../js/sidecar-1.5.0.js"></script>
+      
+    
+  </body>
+</html>
